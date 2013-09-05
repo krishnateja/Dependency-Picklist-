@@ -1,0 +1,186 @@
+<apex:page standardStylesheets="false" showHeader="false" cache="false" controller="oberoiiPadApp">
+<SCRIPT LANGUAGE="JavaScript" SRC="http://code.jquery.com/jquery.min.js"></script>
+<SCRIPT LANGUAGE="JavaScript" SRC="http://code.jquery.com/ui/1.8.16/jquery-ui.min.js"></script>
+<meta name="viewport" content="1024,748, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<style>
+    body{
+        background:url({!$Resource.pbg});
+    }
+    #splash{
+        width:1024px;
+        height:748px;
+        position:absolute;
+        top:0px;
+        left:0px;
+        background:url({!$Resource.landingImg}) no-repeat 50% 172px;
+        
+        -webkit-transition:all 1.0s ease-in-out;
+        opacity:1;
+    }
+    #logo{
+        height:114px;
+        width:258px;        
+        position:absolute;
+        top:184px;
+        left:380px;
+        -webkit-transition:all 1.0s ease-in-out;
+         background:url({!$Resource.landingLogo}) no-repeat ;
+    }
+    #login{
+        height:51px;
+        width:252px;
+        background:url({!$Resource.splash_login});
+        position:absolute;
+        top:651px;
+        left:390px;
+        opacity:0;
+        -webkit-transition:all 1.0s ease-in-out;
+        -webkit-tap-highlight-color: rgba(0,0,0,0); 
+        cursor:pointer;
+    }
+    #main, #propLogin, #pageThree{
+        width:1024px;
+        height:748px;
+        position:absolute;
+        top:0px;
+        left:0px;
+        -webkit-transition:all 1.0s ease-in-out;
+        opacity:0;
+    }
+    #mainframe, #loginframe, #finalframe{
+          margin:30px 13%;
+        
+    width:750px;
+    height:546px;
+    border-radius:20px;
+    border:solid 3px #f76600
+    
+    }
+    #preloader{
+        display:none;
+    }
+    
+    .innerLogo{
+     background:url({!$Resource.innerLogo}) no-repeat ;
+     height:50px;
+     width:109px;
+     margin:10px;
+    }
+    .homeBtn{
+    cursor:pointer;
+    width:71px;
+    height:67px;
+    position:absolute;
+    right:0;
+    top:0px;
+   <!--  background:url({!$Resource.homeBtn}) no-repeat ;-->
+    
+    }
+    body.connected #login { display: none; }
+    body.connected #logout { display: block; }
+    body.not_connected #login { display: block; }
+    body.not_connected #logout { display: none; }
+    
+    
+    #mainframe{
+  
+    
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        setTimeout(function() { window.scrollTo(0, 1) }, 100);
+        $('#mainframe').attr('src','apex/PropertyHome');
+        $('#loginframe').attr('src','apex/PropertyLogin');
+        $('#finalframe').attr('src','apex/PropertyFinalpage');
+        $('#logo').bind('webkitTransitionEnd', function(){ showLogin()});
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    });
+    
+    function loaded(){
+        $('#logo').css('top','30px');  
+    }
+    
+    function showLogin(){
+        $('#login').css('opacity','1');
+    }
+    
+    function showFrame(){
+        $('#splash').css('opacity','0');
+        
+        setTimeout(function () {
+            $('#splash').hide();
+            $('#propLogin').hide();
+            $('#pageThree').hide();
+            $('#main').css('opacity','1');
+        }, 1000);
+        
+    }
+    
+    //AIzaSyAUZNEFia_APNka0uXonr9kiKQy6h1QLOE
+    var Address;
+    var propertyId;
+    var propertyName;
+    var mLeadName;
+    var mLeadFirstName;
+    var mLeadLastName;
+    var mLeadEmail;
+    var mLeadPhone;
+    var fbBool = false;
+    function loadPageTwo(a, p, pn){
+
+        Address = a;
+        propertyId = p;
+        propertyName = pn;  
+        $('#propLogin').show();
+        
+        setTimeout(function () {
+            $('#main').hide();
+            $('#pageThree').hide();
+            $('#propLogin').css('opacity','1');
+        }, 1000);
+    }
+    
+    function loadPageThree(ln){
+        mLeadName = ln;
+        
+        $('#pageThree').show();     
+        $('#pageThree').css('opacity','0');
+        document.getElementById('finalframe').contentWindow.populateKnowns();
+
+        setTimeout(function () {
+            $('#propLogin').hide();
+            $('#pageThree').css('opacity','1');
+        }, 1000);
+    }
+</script>
+<div id="preloader">
+    <img src="{!$Resource.splash_background}"/> 
+    <!--  <img src="{!$Resource.splash_logo}"/> -->  
+    <img src="{!$Resource.splash_login}"/>
+</div>
+<div id="main">
+    <div class="innerLogo"></div>
+    <a href="https://www.salesforce.com/login.jsp?&un=viyer@spreal.demo&pw=salesforce&startURL=%2Fapex%2FoberoiiPadApp"  target="_self" class="homeBtn"></a>
+    <iframe id="mainframe" onload="loaded()" frameborder="0" scrolling="no" />      
+</div>
+<div id="propLogin">
+ <div class="innerLogo"></div>
+    <a href="https://www.salesforce.com/login.jsp?&un=viyer@spreal.demo&pw=salesforce&startURL=%2Fapex%2FoberoiiPadApp"  target="_self" class="homeBtn"></a>
+    <iframe id="loginframe" frameborder="0" scrolling="no" />
+</div>
+<div id="pageThree">
+ <div class="innerLogo"></div>
+    <a href="https://www.salesforce.com/login.jsp?&un=viyer@spreal.demo&pw=salesforce&startURL=%2Fapex%2FoberoiiPadApp"  target="_self" class="homeBtn"></a>
+    <iframe id="finalframe" frameborder="0" scrolling="no" />
+</div>
+<div id="splash">
+
+    <div id="login" onclick="showFrame()"></div>
+    <div id="logo"></div> 
+</div>
+
+</apex:page>

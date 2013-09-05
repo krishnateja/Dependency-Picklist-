@@ -1,0 +1,64 @@
+<apex:page sidebar="false" showHeader="false" controller="oberoiiPadApp" >
+
+<style>
+
+.tableMargin{
+
+margin:20px 0;
+}
+.clBtn{
+width:90px;
+height:37px !important;
+background-image:none !important;
+background-color:#f76600 !important;
+cursor:pointer;
+text-align:center;
+color:#fff !important;
+line-height:30px !important;
+border:solid 1px #d55800 !important;
+text-transform:uppercase !important;
+}
+h2{
+font-size:20px;
+}select, input{
+padding:5px;
+}
+ul li{
+list-style:none;
+color:red;
+margin:0;
+padding:0;
+text-align:center;
+}
+</style>
+<apex:form >
+
+ <table width="100%" border="0" align="center" cellpadding="3" cellspacing="3" class="tableMargin">
+  <tr>
+    <td align="center"><apex:image value="{!$Resource.fbLogin}"/></td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+   <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+  
+    <td align="center"><h2>Mobile Phone</h2></td>
+  </tr>
+  <tr>
+  
+    <td align="center"><label></label>
+        
+        <apex:inputText id="textfield" value="{!phone}"/>
+       
+    </td>
+   </tr>
+  <tr>
+    <td align="center"><apex:commandButton value="Check" action="{!searchWithPh}" styleClass="clBtn"/></td>
+   </tr>
+</table>
+  <apex:messages />
+</apex:form>
+</apex:page>

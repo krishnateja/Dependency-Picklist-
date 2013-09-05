@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>oberoiiPadApp</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>PropertyDetails</members>
+        <members>PropertyFinalpage</members>
+        <members>PropertyHome</members>
+        <members>PropertyLogin</members>
+        <members>oberoiiPadApp</members>
+        <name>ApexPage</name>
+    </types>
+    <version>27.0</version>
+</Package>

@@ -1,0 +1,64 @@
+<apex:page sidebar="false" showHeader="false" controller="oberoiiPadApp">
+
+<style>
+
+.tableMargin{
+
+margin:20px 0px 0 60px;
+
+}
+.clBtn{
+width:90px;
+height:37px !important;
+background-image:none !important;
+background-color:#f76600 !important;
+cursor:pointer;
+text-align:center;
+color:#fff !important;
+line-height:30px !important;
+border:solid 1px #d55800 !important;
+text-transform:uppercase !important;
+}
+h2{
+font-size:20px;
+}select, input{
+padding:5px;
+}
+</style>
+<apex:form >
+ <table width="90%" border="0" align="center" cellpadding="4" cellspacing="4" class="tableMargin">
+  <tr>
+    <td colspan="2" align="center"><h2>Please Enter your Personal Information</h2></td>
+  </tr>
+  <tr>
+    <td width="13%"><strong>First Name</strong></td>
+    <td width="87%">
+    <apex:inputText value="{!rec.firstname}"/>
+        <!--<input type="text" name="textfield" id="textfield"/>-->
+    </td>
+  </tr>
+  <tr>
+    <td width="13%"><strong>Last Name</strong></td>
+    <td width="87%">
+    <apex:inputText value="{!rec.lastname}"/>
+    </td>
+    <!--<td><input type="text" name="textfield2" id="textfield2"/></td>-->
+  </tr>
+  <tr>
+    <td><strong>Email</strong></td>
+    <td><apex:inputText value="{!rec.email}" /></td>
+  </tr>
+  <tr>
+    <td><strong>Phone</strong></td>
+    
+   <td><apex:inputText value="{!rec.Phone}" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+    <apex:commandButton action="{!doAction2}" Value="Submit" styleClass="clBtn"/>
+    </td>
+  </tr>
+ </table>
+ </apex:form>
+</apex:page>

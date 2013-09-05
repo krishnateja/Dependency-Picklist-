@@ -1,0 +1,119 @@
+<apex:page controller="oberoiiPadApp" sidebar="false" showHeader="false">
+<link rel="stylesheet" href="{!URLFOR($Resource.ContentFlowJS,'imageflow.packed.css')}"  />
+<apex:form >
+<script src="{!URLFOR($Resource.ContentFlowJS,'imageflow.js')}" ></script>
+<script>
+function emailClient()
+{
+ sendEmail();
+
+}
+
+
+      domReady(function()
+      {
+            var basic_2 = new ImageFlow();
+            basic_2.init({ ImageFlowID: 'coverflow',
+                   reflections: false,
+                   reflectionP: 0.0,
+                   buttons: false ,                   
+                   slider: false,
+                   imagesHeight: 0.40,
+                   imageFocusM: 1.4,
+                   startID:  3,
+                   onClick: function() {window.open(this.url, '_top');} });                 
+      });
+
+</script>
+<style>
+  
+    
+.tableMargin{
+
+margin:20px;
+background-color:#fff;
+
+}
+.clBtn{
+width:90px;
+height:37px !important;
+background-image:none !important;
+background-color:#f76600 !important;
+cursor:pointer;
+text-align:center;
+color:#fff !important;
+line-height:30px !important;
+border:solid 1px #d55800 !important;
+text-transform:uppercase !important;
+}
+h2{
+font-size:20px;
+}select, input{
+padding:5px;
+}
+    
+    
+    #coverflow .slider {
+            background:url({!URLFOR($Resource.ContentFlowJS,'slider_dark.png')}) top left no-repeat;
+        }
+      
+        #coverflow .scrollbar {
+            border-bottom:1px solid #000;
+        }
+        
+        .imageFlow{
+            height: 300px;
+            visibility: visible;
+        }
+    
+    </style>
+    
+    
+    <table width="100%" border="0" cellspacing="4" cellpadding="4">
+  <tr>
+    <td height="40" align="center"><h2>Property Details</h2></td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>&nbsp;</p>
+      <p>Thank you <strong>{!rec.firstname} {!rec.lastname} </strong>for Registering your Interest in the Property.<br/><br/>
+        
+        Please Enjoy the view. If you any Questions , Please ask our agent Troy Sellers<br/><br/>
+        
+        If you would like to be emailed about the details of this Property, Click the email button below.  </p>
+      <p>
+        <input type="Button" value="Email Me!" class="clBtn" onClick="emailClient();"/>
+        <br/><br/>
+        
+        <strong>Property Name :{!acctName}</strong><br/><br/>
+        <strong>Unit Name : {!trader}</strong><br/><br/>
+        
+        
+        Time Frame for buying : 
+        <select>
+          <option value="1">1 month</option>
+          <option value="2">2 months</option>
+          <option value="3">3 months</option>
+          <option value="4">6 months</option>
+          <option value="4">12 months</option>
+          <option value="4">Just Looking</option>
+        </select>
+    </p></td>
+  </tr>
+</table>
+
+<div id="coverflow" class="imageflow">              
+                <apex:repeat value="{!allImages}" var="x">
+                    <img src="https://c.na1.content.force.com/servlet/servlet.FileDownload?file={!x.id}" alt="{!x.name}" />
+                </apex:repeat> 
+            </div>
+           <!-- <img src="{!$Resource.shadow}" style="top: -292px;position: relative;" /> -->
+<apex:actionFunction name="sendEmail" action="{!sendEmail}"/>
+
+
+
+
+
+</apex:form>
+ 
+</apex:page>
